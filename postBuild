@@ -16,14 +16,16 @@ ccache -o compression=true
 #rom
 cd ~/android/lineage
 repo init --depth=1 -u https://github.com/LineageOS/android.git -b lineage-18.1
-repo sync --force-sync -j8
 
+
+#test
+#repo sync --force-sync -j8
 #device trees
-git clone https://github.com/ArrowOS-Devices/android_kernel_gm_msm8937 kernel/GM/GM8_sprout
-git clone https://github.com/Headache01/android_device_GM_GM8_sprout device/GM/GM8_sprout
-git clone https://github.com/Headache01/android_vendor_GM_GM8_sprout vendor/GM/GM8_sprout
+#git clone https://github.com/ArrowOS-Devices/android_kernel_gm_msm8937 kernel/GM/GM8_sprout
+#git clone https://github.com/Headache01/android_device_GM_GM8_sprout device/GM/GM8_sprout
+#git clone https://github.com/Headache01/android_vendor_GM_GM8_sprout vendor/GM/GM8_sprout
 
 #build
-source build/envsetup.sh
-lunch lineage_GM8_sprout-userdebug
-brunch GM8_sprout
+#source build/envsetup.sh
+#lunch lineage_GM8_sprout-userdebug
+#brunch GM8_sprout
