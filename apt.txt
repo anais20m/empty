@@ -29,3 +29,4 @@ xsltproc
 zip
 zlib1g-dev
 libwxgtk3.0-dev
+sudo
