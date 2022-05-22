@@ -1,6 +1,7 @@
 #!/bin/bash
 
 #test
+cd android/lineage
 repo sync --force-sync -j8
 device trees
 git clone https://github.com/ArrowOS-Devices/android_kernel_gm_msm8937 kernel/GM/GM8_sprout
