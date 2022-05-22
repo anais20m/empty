@@ -1,7 +1,0 @@
-#!/bin/bash
-
-# install sudo
-su -
-apt-get install sudo -y
-usermod -aG sudo jovyan
-echo "jovyan  ALL=(ALL) NOPASSWD:ALL" | sudo tee /etc/sudoers.d/jovyan
