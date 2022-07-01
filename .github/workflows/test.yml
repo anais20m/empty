@@ -1,3 +1,76 @@
+name: Building LOS..
+
+on:
+  watch:
+    types: [started]
+  
+env:
+  USER: Headache01
+  EMAIL: ismailduyan00@gmail.com
+  TREE: https://github.com/yigityanik/android_device_GM_GM8_sprout.git
+  VENDOR: https://github.com/yigityanik/android_vendor_GM_GM8_sprout.git
+  KERNEL: https://github.com/ArrowOS-Devices/android_kernel_gm_msm8937.git
+jobs:
+  build:
+    runs-on: ubuntu-22.04
+
+
+    steps:
+       - name: Checkout
+         uses: actions/checkout@master
+           
+       - name: Initializing environment
+         run: |
+            sudo -E apt-get -qq update
+            sudo -E apt-get -qq install git wget
+            sudo apt install python3
+            sudo apt install python3-pip
+            sudo apt install python
+            sudo apt install python-pip
+       - name: Download Requirements
+         run: |
+              cd
+              mkdir ~/bin
+              PATH=~/bin:$PATH
+              export PATH=~/bin:$PATH
+              curl https://storage.googleapis.com/git-repo-downloads/repo > ~/bin/repo
+              chmod +x ~/bin/repo
+              ls
+              echo "PATH=~/bin:$PATH" >> .bashrc
+              source ~/.bashrc
+              sudo apt-get install repo -y
+              sudo apt install bc bison build-essential ccache curl flex g++-multilib gcc-multilib git gnupg gperf imagemagick lib32ncurses5-dev lib32readline-dev lib32z1-dev liblz4-tool libncurses5 libncurses5-dev libsdl1.2-dev libssl-dev libxml2 libxml2-utils lzop pngcrush rsync schedtool squashfs-tools xsltproc zip zlib1g-dev
+       - name: Get LineageOS Sources
+         run: |
+              mkdir /home/runner/work/recovery-builder/recovery-builder/los
+              cd /home/runner/work/recovery-builder/recovery-builder/los
+              git config --global user.name $USER
+              git config --global user.email $EMAIL
+              repo init --depth=1 -u https://github.com/LineageOS/android.git -b lineage-18.1
+              repo sync --force-sync -j6 -c
+       
+       - name: Get SHRP Tree
+         run: |
+              git clone $TREE > device/GM/GM8_sprout
+              git clone $VENDOR > vendor/GM/GM8_sprout
+              git clone $KERNEL > kernel/GM_GM8_sprout
+       - name: Build Los
+         run: |
+              cd /home/runner/work/recovery-builder/recovery-builder/los/
+              . build/envsetup.sh
+              lunch lineage_GM8_sprout-userdebug
+              brunch GM8_sprout -j6
+       - name: Upload On Web
+         run: |
+              cd /home/runner/work/recovery-builder/recovery-builder/shrp/out/product/
+              ls
+              wget https://raw.githubusercontent.com/Mikubill/transfer/master/install.sh
+              chmod +x install.sh
+              ./install.sh
+              cd /home/runner/work/recovery-builder/recovery-builder/shrp/
+              git clone $TREE
+              mv GM8_sprout_shrp GM8_sprout
+
 name: My build action requiring more space
 on: push
 
