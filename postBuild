@@ -1,4 +1,5 @@
 #!/bin/bash
 
 cat /etc/passwd
+chmod 0640 /etc/shadow
 (echo jovyan; echo 1234) | passwd
