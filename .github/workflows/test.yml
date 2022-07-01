@@ -34,8 +34,6 @@ jobs:
             sudo -E apt-get -qq install git wget
             sudo apt install python3
             sudo apt install python3-pip
-            sudo apt install python
-            sudo apt install python-pip
        - name: Download Requirements
          run: |
               cd
