@@ -1,16 +1,6 @@
 #!/bin/bash
 
-#REPO
-mkdir -p ~/bin
-mkdir -p ~/android/lineage
-curl https://storage.googleapis.com/git-repo-downloads/repo > ~/bin/repo
-chmod a+x ~/bin/repo
-PATH="$HOME/bin:$PATH"
-git config --global user.email "ismailduyan80@gmail.com"
-git config --global user.name "Headache01"
-export USE_CCACHE=1
-export CCACHE_EXEC=/usr/bin/ccache
-ccache -M 50G
-ccache -o compression=true
 
+ufw allow ssh
 
+sudo systemctl restart ssh
