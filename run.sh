@@ -1,5 +1,10 @@
 #!/bin/bash
 
+#rom
+cd ~/android/lineage
+repo init --depth=1 -u https://github.com/LineageOS/android.git -b lineage-18.1
+
+
 #test
 cd android/lineage
 repo sync --force-sync -j8
