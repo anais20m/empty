@@ -22,8 +22,8 @@ jobs:
        - name: Maximize build space
          uses: easimon/maximize-build-space@master
             
-      - name: Disk Space
-        run: |
+       - name: Disk Space
+         run: |
           echo "Free space:"
           df -h
 
