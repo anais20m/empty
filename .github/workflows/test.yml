@@ -18,6 +18,19 @@ jobs:
     steps:
        - name: Checkout
          uses: actions/checkout@master
+         
+       - name: Maximize build space
+         uses: easimon/maximize-build-space@master
+          with:
+            root-reserve-mb: 512
+            swap-size-mb: 1024
+            remove-dotnet: 'true'
+            
+      - name: Disk Space
+        run: |
+          echo "Free space:"
+          df -h
+
            
        - name: Initializing environment
          run: |
@@ -49,7 +62,7 @@ jobs:
               repo init --depth=1 -u https://github.com/LineageOS/android.git -b lineage-18.1
               repo sync --force-sync -j6 -c
        
-       - name: Get SHRP Tree
+       - name: Get LOS Tree
          run: |
               git clone $TREE > device/GM/GM8_sprout
               git clone $VENDOR > vendor/GM/GM8_sprout
@@ -62,33 +75,12 @@ jobs:
               brunch GM8_sprout -j6
        - name: Upload On Web
          run: |
-              cd /home/runner/work/recovery-builder/recovery-builder/shrp/out/product/
+              cd /home/runner/work/recovery-builder/recovery-builder/los/out/product/
               ls
               wget https://raw.githubusercontent.com/Mikubill/transfer/master/install.sh
               chmod +x install.sh
               ./install.sh
-              cd /home/runner/work/recovery-builder/recovery-builder/shrp/
+              cd /home/runner/work/recovery-builder/recovery-builder/los/
               git clone $TREE
               mv GM8_sprout_shrp GM8_sprout
 
-name: My build action requiring more space
-on: push
-
-jobs:
-  build:
-    name: Build my artifact
-    runs-on: ubuntu-latest
-    steps:
-      - name: Maximize build space
-        uses: easimon/maximize-build-space@master
-        with:
-          root-reserve-mb: 512
-          swap-size-mb: 1024
-          remove-dotnet: 'true'
-      - name: Checkout
-        uses: actions/checkout@v2
-
-      - name: Build
-        run: |
-          echo "Free space:"
-          df -h
