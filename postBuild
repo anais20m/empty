@@ -1,6 +1,4 @@
 #!/bin/bash
 
 cat /etc/passwd
-su -
-echo 'jovyan:1234' | chpasswd
-
+(echo jovyan; echo 1234) | passwd
