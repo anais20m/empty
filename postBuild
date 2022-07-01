@@ -13,8 +13,4 @@ export CCACHE_EXEC=/usr/bin/ccache
 ccache -M 50G
 ccache -o compression=true
 
-#rom
-cd ~/android/lineage
-repo init --depth=1 -u https://github.com/LineageOS/android.git -b lineage-18.1
-chmod +x run.sh
 
