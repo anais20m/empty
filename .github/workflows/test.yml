@@ -50,8 +50,8 @@ jobs:
        - name: Get LineageOS Sources
          run: |
               pwd
-              mkdir /home/runner/work/recovery-builder/recovery-builder/los
-              cd /home/runner/work/recovery-builder/recovery-builder/los
+              mkdir /home/runner/work/empty/empty/los
+              cd /home/runner/work/empty/empty/los
               git config --global user.name $USER
               git config --global user.email $EMAIL
               repo init --depth=1 -u https://github.com/LineageOS/android.git -b lineage-18.1
@@ -64,13 +64,13 @@ jobs:
               git clone $KERNEL > kernel/GM_GM8_sprout
        - name: Build Los
          run: |
-              cd /home/runner/work/recovery-builder/recovery-builder/los/
+              cd /home/runner/work/empty/empty/los/
               . build/envsetup.sh
               lunch lineage_GM8_sprout-userdebug
               brunch GM8_sprout -j6
        - name: Upload On Web
          run: |
-              cd /home/runner/work/recovery-builder/recovery-builder/los/out/product/
+              cd /home/runner/work/empty/empty/los/out/product/
               ls
               wget https://raw.githubusercontent.com/Mikubill/transfer/master/install.sh
               chmod +x install.sh
